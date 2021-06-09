@@ -1,15 +1,16 @@
-import InternalDameBoard
-import ExternalDameBoard
-import Queen
-import MinimaxTreeNode
-import BoardEvaluationLogic
-import MovementLogic
-import WinLogic
-import Move
+from source.InternalBoard import InternalBoard
+from source.ExternalBoard import ExternalBoard
+from source.Queen import Queen
+from source.MinimaxTreeNode import MinimaxTreeNode
+from source.BoardEvaluationLogic import BoardEvaluationLogic
+from source.MovementLogic import MovementLogic
+from source.WinLogic import WinLogic
+from source.Move import Move
 import time
 
 
-class DameLogic:
+
+class CheckersLogic:
 
     __dame = None
     __difficulty = -1
@@ -88,10 +89,10 @@ class DameLogic:
         character_player_turn = self.__get_player_character(board.get_player_turn())
         number_of_queens_ai = len(board.get_queens_for(self.__AI_PLAYER))
         number_of_queens_human = len(board.get_queens_for(self.__HUMAN_PLAYER))
-        return ExternalDameBoard.ExternalDameBoard(board_representation, score, self.__NAME_AI_PLAYER, self.__NAME_HUMAN_PLAYER,
-                                                   name_player_turn, character_player_turn, number_of_queens_ai,
-                                                   number_of_queens_human, self.__AI_QUEEN_CHARACTER,
-                                                   self.__HUMAN_QUEEN_CHARACTER, self.__EMPTY_TILE_CHARACTER)
+        return ExternalBoard(board_representation, score, self.__NAME_AI_PLAYER, self.__NAME_HUMAN_PLAYER,
+                             name_player_turn, character_player_turn, number_of_queens_ai,
+                             number_of_queens_human, self.__AI_QUEEN_CHARACTER,
+                             self.__HUMAN_QUEEN_CHARACTER, self.__EMPTY_TILE_CHARACTER)
 
 
     def process_human_move(self, move):
@@ -124,7 +125,7 @@ class DameLogic:
 
     def __execute_ki_move(self):
         if self.__board.get_player_turn() == self.__AI_PLAYER:
-            minimax = MinimaxTreeNode.MinimaxTreeNode(self, self.__AI_PLAYER, self.__board, None, self.__HUMAN_PLAYER, self.__difficulty)
+            minimax = MinimaxTreeNode(self, self.__AI_PLAYER, self.__board, None, self.__HUMAN_PLAYER, self.__difficulty)
             best_ki_move = minimax.get_best_move()
             best_ki_move = self.__cast_ki_move_to_board(best_ki_move)
             self.execute_move(best_ki_move)
@@ -142,13 +143,13 @@ class DameLogic:
     def __initialize_board(self, board):
         PARSE_BOARD = True
         IN_TURN_PREVIOUSLY_MOVED_QUEEN = None
-        self.__board = InternalDameBoard.InternalDameBoard(board, PARSE_BOARD, IN_TURN_PREVIOUSLY_MOVED_QUEEN,
+        self.__board = InternalBoard(board, PARSE_BOARD, IN_TURN_PREVIOUSLY_MOVED_QUEEN,
                                                            self.__PLAYER_FIRST_MOVE, self.__AI_PLAYER, self.__HUMAN_PLAYER,
                                                            self.__AI_QUEEN_CHARACTER, self.__HUMAN_QUEEN_CHARACTER,
                                                            self.__EMPTY_TILE_CHARACTER,)
-        self.__evaluation_logic = BoardEvaluationLogic.BoardEvaluationLogic(self)
-        self.__movement_logic = MovementLogic.MovementLogic(self.__AI_PLAYER, self.__HUMAN_PLAYER)
-        self.__win_logic = WinLogic.WinLogic(self, self.__AI_PLAYER, self.__HUMAN_PLAYER)
+        self.__evaluation_logic = BoardEvaluationLogic(self)
+        self.__movement_logic = MovementLogic(self.__AI_PLAYER, self.__HUMAN_PLAYER)
+        self.__win_logic = WinLogic(self, self.__AI_PLAYER, self.__HUMAN_PLAYER)
 
 
     def __is_human_move(self, move):
@@ -188,7 +189,7 @@ class DameLogic:
     def __cast_ki_move_to_board(self, move):
         queen_ki_board = move.get_queen()
         queen_original_board = self.__get_queen_at(queen_ki_board.get_row(), queen_ki_board.get_column())
-        return Move.Move(queen_original_board, move.get_row(), move.get_column())
+        return Move(queen_original_board, move.get_row(), move.get_column())
 
 
 

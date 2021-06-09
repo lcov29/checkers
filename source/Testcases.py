@@ -1,4 +1,4 @@
-import DameLogic
+from source.CheckersLogic import CheckersLogic
 
 ############## HOW TO RUN TESTCASES #####################
 #      Uncomment the testcase functions in classes:     #
@@ -23,7 +23,7 @@ def print_testcase(name_testcase, result, expected_result):
     print(output + str(name_testcase))
 
 
-dame_logic = DameLogic.DameLogic()
+dame_logic = CheckersLogic()
 a = dame_logic.get_ai_character()
 p = dame_logic.get_human_character()
 _ = dame_logic.get_empty_tile_character()

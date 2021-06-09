@@ -1,4 +1,4 @@
-import Move
+from source.Move import Move
 
 # wraps a Move-object to prevent the manipulation of the contained Queen-object
 # by the caller of Dame.get_possible_moves_for(row, column)

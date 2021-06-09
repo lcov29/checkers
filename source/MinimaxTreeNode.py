@@ -1,4 +1,4 @@
-import AdapterPrint
+# import AdapterPrint
 
 class MinimaxTreeNode:
     __dame_logic = None
@@ -83,7 +83,7 @@ class MinimaxTreeNode:
                 child_max_score = child
         return child_max_score
 
-
+    """
     # FOR TESTING
     def test_print(self):
         if (len(self.__child_nodes) == 0):
@@ -98,3 +98,4 @@ class MinimaxTreeNode:
         print(str(self.__current_tree_depth) + ": " + str(self.__subtree_score))
         for child in self.__child_nodes:
             child.test_print_scores()
+    """

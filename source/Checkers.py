@@ -1,15 +1,16 @@
-import DameLogic
-import MoveWrapper
-import AdapterPrint
+from source.CheckersLogic import CheckersLogic
+from source.MoveWrapper import MoveWrapper
+from source.AdapterPrint import AdapterPrint
 
-class Dame:
+
+class Checkers:
 
     __logic = None
     __possible_moves = []
     __observer = []
 
     def __init__(self, difficulty):
-        self.__logic = DameLogic.DameLogic(self, difficulty)
+        self.__logic = CheckersLogic(self, difficulty)
         self.__possible_moves = []
         self.__observer = []
 
@@ -59,7 +60,7 @@ class Dame:
     def __wrap_moves(self, moves):
         output = []
         for move in moves:
-            output.append(MoveWrapper.MoveWrapper(move))
+            output.append(MoveWrapper(move))
         return output
 
     def __get_selected_move(self, row, column):

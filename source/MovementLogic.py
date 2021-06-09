@@ -1,4 +1,4 @@
-import Move
+from source.Move import Move
 
 class MovementLogic:
 
@@ -82,7 +82,7 @@ class MovementLogic:
         for prefix_1 in prefixes:
             for prefix_2 in prefixes:
                 for step in [1, 2]:
-                    move = Move.Move(queen, queen.get_row() + prefix_1 * step, queen.get_column() + prefix_2 * step)
+                    move = Move(queen, queen.get_row() + prefix_1 * step, queen.get_column() + prefix_2 * step)
                     moves.append(move)
         return moves
 

@@ -1,31 +1,32 @@
-import Dame
-import Observer
-import AdapterPrint
+from source.Checkers import Checkers
+from source.Observer import Observer
+from source.AdapterPrint import AdapterPrint
+
 
 class TerminalGame:
 
-    __dame = None
+    __checkers = None
 
     def __init__(self, difficulty):
-        self.__dame = Dame.Dame(difficulty)
-        observer = Observer.Observer(self, AdapterPrint.AdapterPrint())
-        self.__dame.add_observer(observer)
+        self.__checkers = Checkers(difficulty)
+        observer = Observer(self, AdapterPrint())
+        self.__checkers.add_observer(observer)
 
 
     def print_board(self):
-        self.__dame.send_external_board()
+        self.__checkers.send_external_board()
 
 
     def show_moves_for(self, row, column):
-        self.__dame.get_possible_moves_for(row, column)
+        self.__checkers.get_possible_moves_for(row, column)
 
 
     def execute_move_for(self, row, column):
-        self.__dame.execute_move(row, column)
+        self.__checkers.execute_move(row, column)
 
 
     def get_winner(self):
-        return self.__dame.get_winner()
+        return self.__checkers.get_winner()
 
 
     # Callback-methods
@@ -41,7 +42,7 @@ class TerminalGame:
 
 game = TerminalGame(4)
 
-print("-- Welcome to Dame --\nn: new game\nq: quit")
+print("-- Welcome to Chekcers --\n")
 
 while True:
     command = input("(n) new game or (q) quit : ")

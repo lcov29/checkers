@@ -1,8 +1,9 @@
-import Queen
-import Move
-import ExternalDameBoard
+from source.Queen import Queen
+from source.Move import Move
+from source.ExternalBoard import ExternalBoard
 
-class InternalDameBoard:
+
+class InternalBoard:
 
     __board = [[]]
     __queens = []
@@ -25,7 +26,7 @@ class InternalDameBoard:
         clone_in_turn_previously_moved_queen = None
         if self.__in_turn_previously_moved_queen is not None:
             clone_in_turn_previously_moved_queen = self.__in_turn_previously_moved_queen.clone()
-        clone = InternalDameBoard(self.__get_clone_of_board(), False, clone_in_turn_previously_moved_queen, self.get_player_turn())
+        clone = InternalBoard(self.__get_clone_of_board(), False, clone_in_turn_previously_moved_queen, self.get_player_turn())
         clone.set_score(self.get_score())
         clone.set_player_turn(self.get_player_turn())
         return clone
@@ -112,9 +113,9 @@ class InternalDameBoard:
             for column in board_range:
                 board_element = board[row][column]
                 if board_element == ai_queen_character:
-                    queen = Queen.Queen(row, column, ai_player, ai_queen_character)
+                    queen = Queen(row, column, ai_player, ai_queen_character)
                 elif board_element == human_queen_character:
-                    queen = Queen.Queen(row, column, human_player, human_queen_character)
+                    queen = Queen(row, column, human_player, human_queen_character)
                 elif board_element == empty_tile_character:
                     queen = None
                 else:

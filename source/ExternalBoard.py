@@ -1,6 +1,6 @@
 # for external communication of the board state
 
-class ExternalDameBoard:
+class ExternalBoard:
 
     __board = [[]]
     __score = -1
